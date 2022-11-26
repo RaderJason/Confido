@@ -1,2 +1,7 @@
+import abc
+
+
 class AbstractRegionSelector:
-    pass
+    @abc.abstractmethod
+    def update(self, state, proposed_step, approx_quality):
+        pass

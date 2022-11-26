@@ -1,1 +1,1 @@
-# from .base import AbstractRegionSelector
+from classic import ClassicRegion
