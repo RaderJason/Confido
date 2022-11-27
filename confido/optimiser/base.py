@@ -184,22 +184,7 @@ class AbstractOptimiser:
             # is a monotonically decreasing algorithm so we reject the step and
             # continue with a smaller trust region.
             # there has to be a cleaner way to make this update though.
-            return TrustRegionState(
-                state.max_iter,
-                tr_size,
-                state.agreement,
-                state.current_x,
-                state.current_fx,
-                state.gradient,
-                state.approx_hess,
-                state.jac,
-                state.regularisation,
-                state.subproblem_algo,
-                state.region_select,
-                state.subproblem_args,
-                state.region_args,
-                state.args,
-            )
+            return state._replace(trust_region_size=tr_size)
 
         state = self._first_order_quantities(fn, step, state)
         state = self._approximate_hessian(fn, step, state)
@@ -207,22 +192,12 @@ class AbstractOptimiser:
         region_args = self._update_region_args(state)
         regularisation = self._update_regularisation
 
-        return TrustRegionState(
-            state.max_iter,
-            tr_size,
-            state.agreement,
-            state.current_x,
-            state.current_fx,
-            state.gradient,
-            state.approx_hess,
-            state.jac,
-            regularisation,
-            state.subproblem_algo,
-            state.region_select,
-            subproblem_args,
-            region_args,
-            state.args,
-        )
+        return state._replace(
+            trust_region_size=tr_size,
+            regularisation=regularisation,
+            subproblem_args=subproblem_args,
+            region_args=region_args
+            )
 
     def __call__(self, fn: callable, initial_guess: PyTree, params: PyTree, tol=1e-4):
         iters = 0
