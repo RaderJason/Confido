@@ -1,12 +1,13 @@
-# Confido
-Trust region optimisation in JAX
+# Confido: Adaptive Trust Region Methods in JAX
+Trust region optimisation in JAX!
+
+Trust region algorithms consist principally of a Hessian approximation scheme, a method for choosing the trust region radius, and an algorithm for solving the trust region subproblem. Confido considers these as seperate components, with the algorithms for choosing the trust region radius and the algorithm for solving the trust region subproblem chosen at runtime. This is to allow for quick prototyping and testing adaptive trust region algorithms, ie. nonstandard methods of choosing the trust region size.
 
 # TODO:
 1. Create requirements file
-5. Add proper axis scaling as regularisation method
-7. Add Cauchy point solve of subproblem
-8. Add Newton trust region method
-9. Add dogleg solve of subproblem
+2. Add proper axis scaling as regularisation method
+3. Handle "the hard case"
+4. Two-dim subspace method for solving subproblem
 
 # Next steps
 - choice of initial trust region size? start with this https://epubs.siam.org/doi/pdf/10.1137/S1064827595286955 and see how
